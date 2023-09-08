@@ -31,10 +31,8 @@ function generateRandomPhoneNumber() {
         // Mengurai string JSON
         const parsedResult = JSON.parse(registerAcc);
         console.log(parsedResult)
-        // Mengambil nilai "msg"
-        const msg = parsedResult.msg;
-
-        console.log(`Pesan: ${msg}`);
+        const getStatusRegister = getBetween(parsedResult, '{"msg":"', '"')
+        console.log(getStatusRegister)
 
         // Selanjutnya, Anda dapat menggunakan nilai "msg" sesuai kebutuhan Anda
     }
