@@ -26,29 +26,17 @@ function generateRandomPhoneNumber() {
     const inputJumlahRefferal = readlineSync.question(`[?] Masukkan Jumlah Refferal : `);
 
     for (let i = 0; i < inputJumlahRefferal; i++) {
-        const registerAcc = await getRegister(value, phoneNumber);
-        console.log(registerAcc)
-        // Mengurai string JSON
-        const parsedResult = JSON.parse(registerAcc);
-        console.log(parsedResult)
-        const getStatusRegister = getBetween(parsedResult, '{"msg":"', '"')
-        console.log(getStatusRegister)
-
-        // Selanjutnya, Anda dapat menggunakan nilai "msg" sesuai kebutuhan Anda
+        for (let i = 0; i < inputJumlahRefferal; i++) {
+            const registerAcc = await getRegister(value, phoneNumber);
+            // Mengurai string JSON
+            const parsedResult = JSON.parse(registerAcc);
+            const getStatusRegister = getBetween(parsedResult, '{"msg":"', '"')
+            if (getStatusRegister === `login berhasil`) {
+                console.log(`[!] ${chalk.yellow(`Refferal ke-${i + 1}`)}`)
+                console.log(`[!] ${chalk.green(`Succes Registrasi`)}`)
+            } else {
+                console.log(`[!] ${chalk.red(`Gagal Registrasi`)}`)
+            }
+        }
     }
-    // //!Generate Random Phone
-    // const phoneNumber = generateRandomPhoneNumber();
-    // const resultGetValue = await getValue();
-    // const value = getBetween(resultGetValue, 'name="mobile_prefix" value="', '"');
-    // const inputJumlahRefferal = readlineSync.question(`[?] Masukkan Jumlah Refferal : `);
-    // for (let i = 0; i < inputJumlahRefferal; i++) {
-    //     const registerAcc = await getRegister(value, phoneNumber);
-    //     console.log(registerAcc)
-    //     // if (registerAcc === `"{\"msg\":\"login berhasil\",\"code\":1,\"url\":\"\\\/login_index.html\"}"`) {
-    //     //     console.log(`[!] ${chalk.yellow(`Refferal ke-${i + 1}`)}`)
-    //     //     console.log(`[!] ${chalk.green(`Succes Registrasi`)}`)
-    //     // } else {
-    //     //     console.log(`[!] ${chalk.red(`Gagal Registrasi`)}`)
-    //     // }
-    // }
 })();
