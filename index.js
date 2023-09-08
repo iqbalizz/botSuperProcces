@@ -24,13 +24,33 @@ function generateRandomPhoneNumber() {
     const resultGetValue = await getValue();
     const value = getBetween(resultGetValue, 'name="mobile_prefix" value="', '"');
     const inputJumlahRefferal = readlineSync.question(`[?] Masukkan Jumlah Refferal : `);
+
     for (let i = 0; i < inputJumlahRefferal; i++) {
         const registerAcc = await getRegister(value, phoneNumber);
-        if (registerAcc === `"{\"msg\":\"login berhasil\",\"code\":1,\"url\":\"\\\/login_index.html\"}"`) {
-            console.log(`[!] ${chalk.yellow(`Refferal ke-${i + 1}`)}`)
-            console.log(`[!] ${chalk.green(`Succes Registrasi`)}`)
-        } else {
-            console.log(`[!] ${chalk.red(`Gagal Registrasi`)}`)
-        }
+        console.log(registerAcc)
+        // Mengurai string JSON
+        const parsedResult = JSON.parse(registerAcc);
+        console.log(parsedResult)
+        // Mengambil nilai "msg"
+        const msg = parsedResult.msg;
+
+        console.log(`Pesan: ${msg}`);
+
+        // Selanjutnya, Anda dapat menggunakan nilai "msg" sesuai kebutuhan Anda
     }
+    // //!Generate Random Phone
+    // const phoneNumber = generateRandomPhoneNumber();
+    // const resultGetValue = await getValue();
+    // const value = getBetween(resultGetValue, 'name="mobile_prefix" value="', '"');
+    // const inputJumlahRefferal = readlineSync.question(`[?] Masukkan Jumlah Refferal : `);
+    // for (let i = 0; i < inputJumlahRefferal; i++) {
+    //     const registerAcc = await getRegister(value, phoneNumber);
+    //     console.log(registerAcc)
+    //     // if (registerAcc === `"{\"msg\":\"login berhasil\",\"code\":1,\"url\":\"\\\/login_index.html\"}"`) {
+    //     //     console.log(`[!] ${chalk.yellow(`Refferal ke-${i + 1}`)}`)
+    //     //     console.log(`[!] ${chalk.green(`Succes Registrasi`)}`)
+    //     // } else {
+    //     //     console.log(`[!] ${chalk.red(`Gagal Registrasi`)}`)
+    //     // }
+    // }
 })();
